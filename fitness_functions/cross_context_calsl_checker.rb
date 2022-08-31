@@ -12,7 +12,7 @@ module FitnessFunctions
     private
 
     def select_include_nodes(sexp)
-      sexp.select { |node| node[0] == :send && node[1] == nil && node[2] == :include }
+      sexp.select { |node| node[0] == :send && node[1].nil? && node[2] == :include }
     end
 
     def select_di_import_node(import_sexps)
@@ -20,25 +20,22 @@ module FitnessFunctions
     end
 
     def get_imported_dependencies(import_sexps)
-      import_sexps.empty? ? [] : import_sexps.flat_map { |sexp| sexp[3][3][1..-1].map{ |n| n[2][1] } }
+      import_sexps.empty? ? [] : import_sexps.flat_map { |sexp| sexp[3][3][1..].map { |n| n[2][1] } }
     end
 
-    def find_dependencies(sexp)
+    def find_dependencies(sexp) # rubocop:disable Metrics/MethodLength
       di_imports = []
 
       loop do
         sexp = sexp.pop
+        next unless sexp[0] == :begin
 
-        if sexp[0] == :begin
-          di_imports = get_imported_dependencies(
-            select_di_import_node(
-              select_include_nodes(sexp)
-            )
+        di_imports = get_imported_dependencies(
+          select_di_import_node(
+            select_include_nodes(sexp)
           )
-          break
-        else
-          next
-        end
+        )
+        break
       end
 
       di_imports

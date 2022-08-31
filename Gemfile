@@ -6,3 +6,6 @@ ruby '3.1.2'
 
 gem 'dry-system', '~> 0.2'
 gem 'zeitwerk'
+
+# fitness functions
+gem 'parser'

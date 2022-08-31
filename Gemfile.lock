@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ast (2.4.2)
     concurrent-ruby (1.1.10)
     dry-auto_inject (0.9.0)
       dry-container (>= 0.3.4)
@@ -19,6 +20,8 @@ GEM
       dry-container (~> 0.10, >= 0.10.0)
       dry-core (~> 0.5, >= 0.5)
       dry-inflector (~> 0.1, >= 0.1.2)
+    parser (3.1.2.1)
+      ast (~> 2.4.1)
     zeitwerk (2.6.0)
 
 PLATFORMS
@@ -26,6 +29,7 @@ PLATFORMS
 
 DEPENDENCIES
   dry-system (~> 0.2)
+  parser
   zeitwerk
 
 RUBY VERSION

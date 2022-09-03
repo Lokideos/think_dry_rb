@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/boot'
+
+puts 'Loading application'
+
+require 'irb'
+IRB.start(__FILE__)

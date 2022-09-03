@@ -20,5 +20,7 @@ gem 'pg'
 gem 'parser'
 
 group :development do
+  gem 'pry'
+  gem 'pry-byebug'
   gem 'rubocop', '~> 1.3', require: false
 end

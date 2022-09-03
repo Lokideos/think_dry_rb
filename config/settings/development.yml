@@ -1,0 +1,4 @@
+db:
+  user: postgres
+  password: notsecure
+  database: think_dry_rb_development

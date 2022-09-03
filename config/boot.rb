@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ENV['PROJECT_ENV'] ||= 'development'
+
 require 'bundler/setup'
 Bundler.require(:default, ENV.fetch('PROJECT_ENV', :development).to_sym)
 

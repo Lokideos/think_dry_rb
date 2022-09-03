@@ -1,0 +1,5 @@
+# Ignore local rubymine settings
+.idea/
+
+# Ignore local docker-compose file
+docker-compose.yml

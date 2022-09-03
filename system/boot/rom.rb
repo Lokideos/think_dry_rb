@@ -12,17 +12,31 @@ Container.register_provider(:db) do |_container|
     db_url = "postgres://#{user}:#{password}@#{host}:#{port}/#{database}"
     rom = ROM.container(:sql, db_url) do |configuration|
       configuration.relation(:accounts) do
-        schema(infer: true)
+        schema(infer: true) do
+          associations do
+            has_many :toys
+          end
+        end
         auto_struct true
       end
 
       configuration.relation(:toys) do
-        schema(infer: true)
+        schema(infer: true) do
+          associations do
+            has_one :toys_characteristics
+
+            belongs_to :account
+          end
+        end
         auto_struct true
       end
 
       configuration.relation(:toys_characteristics) do
-        schema(infer: true)
+        schema(infer: true) do
+          associations do
+            belongs_to :toy
+          end
+        end
         auto_struct true
       end
     end

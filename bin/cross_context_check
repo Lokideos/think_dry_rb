@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+
+require_relative '../fitness_functions/cross_context_calsl_checker'
+
+# =========================================
+
+puts
+puts
+
+puts
+puts '====== Testing Context ======'
+puts
+
+whitelist = %w[
+  contexts.testing.repositories
+  contexts.testing.libs
+]
+
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/testing/commands/send_test_results.rb', whitelist: whitelist)
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/testing/commands/test_toy.rb', whitelist: whitelist)
+
+puts
+puts '****'
+puts
+
+whitelist = %w[persistence]
+
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/testing/repositories/account.rb', whitelist: whitelist)
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/testing/repositories/toy.rb', whitelist: whitelist)
+
+puts
+puts '****'
+puts
+
+whitelist = %w[contexts.testing.repositories]
+
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/testing/queries/toys_for_testing.rb', whitelist: whitelist)
+
+puts
+puts '====== Billing Context ======'
+puts
+
+whitelist = %w[
+  contexts.billing.repositories
+  contexts.billing.libs
+]
+
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/billing/commands/increase_account_balance.rb', whitelist: whitelist)
+
+puts
+puts '****'
+puts
+
+whitelist = %w[
+  persistence
+]
+
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/billing/repositories/account.rb', whitelist: whitelist)
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/billing/repositories/test_result.rb', whitelist: whitelist)
+FitnessFunctions::CrossContextCallsChecker.new.call('contexts/billing/repositories/toy.rb', whitelist: whitelist)

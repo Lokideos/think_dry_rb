@@ -15,6 +15,7 @@ Container.register_provider(:db) do |_container|
         schema(infer: true) do
           associations do
             has_many :toys
+            has_many :test_results
           end
         end
         auto_struct true
@@ -35,6 +36,15 @@ Container.register_provider(:db) do |_container|
         schema(infer: true) do
           associations do
             belongs_to :toy
+          end
+        end
+        auto_struct true
+      end
+
+      configuration.relation(:test_results) do
+        schema(infer: true) do
+          associations do
+            belongs_to :account
           end
         end
         auto_struct true
